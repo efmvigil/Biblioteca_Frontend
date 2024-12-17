@@ -18,7 +18,7 @@ export default function CardLivro({ livro }) {
       <div className="col-lg-2 mt-3 cardlivro">
         <div className="container-sm">
           <div className="livro-card">
-            <img src={livro.imagem} alt={livro.titulo} height="200px" onClick={VizualizarLivro} />
+            <img src={livro.imagem} alt={"Imagem-"+livro.titulo} height="200px" onClick={VizualizarLivro} />
             <h4>{livro.titulo}</h4>
             <button className="btn btn-success" onClick={VizualizarLivro}>
               Alugar

@@ -1,7 +1,9 @@
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react"
+import "./galeria.css"
 import LivroService from "../service/LivroService";
 import CardLivro from "./CardLivro_new";
+import Carroussel from "./Carroussel"
 
 export default function Galeria() {
 
@@ -12,7 +14,8 @@ export default function Galeria() {
   }, [])
 
   return (
-    <section className="container">
+    <section className="galeria">
+       <Carroussel></Carroussel>
         <div className="row ">
             { listaLivros.map(livro => 
                 <CardLivro key={livro.id} livro={livro} />

@@ -1,9 +1,9 @@
 import './card.css';
-function Card() {
+function Card(props) {
   return (
     <div className="card">
-      <img src="/assets/img/imagem1.png" alt="" />
-      <h3>Titulo do Livro</h3>
+      <img src={props.img} alt="Capa do livro" />
+      <h3>{props.titulo}</h3>
     </div>
   );
 }

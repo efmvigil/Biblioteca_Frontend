@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Outlet } from "react-router-dom"
+import { Outlet } from 'react-router-dom';
 
 import './App.css';
 //import LivroService from "./service/LivroService";
@@ -12,15 +12,14 @@ import Perfil from './components/perfil';
 export default function App() {
   return (
     <>
-    <header>
-      <Menu></Menu>
-    </header>
+      <header>
+        <Menu></Menu>
+      </header>
       <main>
-        <div className="container mt-3">          
+        <div className="container mt-3">
           <Outlet> </Outlet>
         </div>
       </main>
-      
     </>
   );
 }

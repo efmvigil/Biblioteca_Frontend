@@ -14,4 +14,15 @@ async function umUsuario(id) {
   }
 }
 
-export default umUsuario;
+async function atualizarUsuario(id, atualizacao) {
+  try {
+    const response = await axios.put(BASE_URL + '/' + id, atualizacao);
+    return response.data;
+  } catch (error) {
+    const mensagemErro =
+      error.response?.data.msg || 'Erro desconhecido ao atualizar usuário';
+    throw new Error(mensagemErro);
+  }
+}
+
+export { umUsuario, atualizarUsuario };

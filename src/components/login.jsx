@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import {useNavigate } from "react-router-dom";
+
 import './login.css';
 import logarUsuario from '../service/AuthService';
 
 function Login() {
+  const navigate = useNavigate(); 
   const [matricula, setMatricula] = useState('');
   const [senha, setSenha] = useState('');
   const [mensagem, setMensagem] = useState('');
@@ -11,7 +14,8 @@ function Login() {
     event.preventDefault();
     try {
       const token = await logarUsuario(matricula, senha);
-      setMensagem('Usuario logado com sucesso');
+      alert('Usuario logado com sucesso')
+      navigate("/")
     } catch (error) {
       setMensagem('Erro: ' + (error.response?.data.msg || 'Erro desconhecido'));
     }

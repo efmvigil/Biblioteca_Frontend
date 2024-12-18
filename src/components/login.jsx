@@ -16,6 +16,8 @@ function Login() {
       const token = await logarUsuario(matricula, senha);
       alert('Usuario logado com sucesso')
       navigate("/")
+      window.location.reload(true);
+      
     } catch (error) {
       setMensagem('Erro: ' + (error.response?.data.msg || 'Erro desconhecido'));
     }

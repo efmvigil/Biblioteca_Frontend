@@ -1,0 +1,16 @@
+.livro-detalhes {
+    display: flex; /* Ativa o flexbox */
+    align-items: flex-start; /* Alinha os itens no topo */
+    gap: 20px; /* Espaço entre a imagem e o texto */
+  }
+  
+  .imagem-livro {
+    width: 150px; /* Largura da imagem */
+    height: auto; /* Mantém a proporção da imagem */
+    object-fit: cover; /* Garante que a imagem seja cortada de forma elegante */
+  }
+  
+  .txt-modal {
+    flex: 1; /* Faz com que o texto ocupe o restante do espaço disponível */
+  }
+  

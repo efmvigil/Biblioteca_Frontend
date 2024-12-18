@@ -1,16 +1,29 @@
 import { useState } from "react";
+import LivroRetirado from "../service/LivroRetirado";
 import ModalLivro from "./modal";
 
 export default function CardLivro({ livro }) {
-  const [showModal, setShowModal] = useState(false); // Controla a exibição do modal
+  const [showModal, setShowModal] = useState(false); 
+
+
+  const AlugarLivro = async () => {
+    try {
+      await LivroRetirado.InserirLivroRetirado(livro.id);
+      alert("Livro alugado com sucesso!");
+      setShowModal(false); 
+    } catch (error) {
+      console.error("Erro ao alugar o livro:", error);
+      alert("Erro ao alugar o livro. Verifique se você está logado.");
+    }
+  };
 
   const VizualizarLivro = (e) => {
-    e.stopPropagation(); 
-    setShowModal(true);  
+    e.stopPropagation();
+    setShowModal(true); 
   };
 
   const fecharModal = () => {
-    setShowModal(false); // Fecha o modal
+    setShowModal(false); 
   };
 
   return (
@@ -20,9 +33,8 @@ export default function CardLivro({ livro }) {
           <div className="livro-card">
             <img src={livro.imagem} alt={"Imagem-"+livro.titulo} height="200px" onClick={VizualizarLivro} />
             <h4>{livro.titulo}</h4>
-            <button className="btn btn-success" onClick={VizualizarLivro}>
-              Alugar
-            </button>
+
+            <button className="btn btn-success" onClick={AlugarLivro}>Alugar </button>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import LivroService from "../service/LivroService";
 import { useState, useEffect } from "react";
 import LivroRetirado from "../service/LivroRetirado";
+import './modal.css';
 
 
 export default function ModalLivro({ id, fecharModal }) {
@@ -13,7 +14,7 @@ export default function ModalLivro({ id, fecharModal }) {
     try {
       await LivroRetirado.InserirLivroRetirado(livro.id);
       alert("Livro alugado com sucesso!");
-      setShowModal(false); 
+      setShowModal(false);
     } catch (error) {
       console.error("Erro ao alugar o livro:", error);
       alert("Erro ao alugar o livro. Verifique se você está logado.");
@@ -34,24 +35,28 @@ export default function ModalLivro({ id, fecharModal }) {
           </div>
           <div className="modal-body">
             {apenasLivro ? (
-              <>
-              
-                <img className="" src={apenasLivro.imagem} alt={apenasLivro.titulo} height="200px" />
+              <div className="livro-detalhes">
+                <img
+                  className="imagem-livro"
+                  src={apenasLivro.imagem}
+                  alt={apenasLivro.titulo}
+                />
                 <div className="txt-modal">
-                  <h4 className="">Titulo: {apenasLivro.titulo}</h4>
-                  <h6 className="">Autor: {apenasLivro.autor}</h6>
-                  <h6 className="">Editora: {apenasLivro.editora}</h6>
+                  <h4>Titulo: {apenasLivro.titulo}</h4>
+                  <h6>Autor: {apenasLivro.autor}</h6>
+                  <h6>Editora: {apenasLivro.editora}</h6>
                   <p>Descrição: {apenasLivro.descricao}</p>
-                </div>
 
-                <button className="btn btn-success" onClick={AlugarLivro}>Alugar</button>
-               
-              </>
+                </div>
+              </div>
             ) : (
               <p>Carregando...</p>
             )}
           </div>
           <div className="modal-footer">
+          <button className="btn btn-success" onClick={AlugarLivro}>
+                    Alugar
+                  </button>
             <button type="button" className="btn btn-secondary" onClick={fecharModal}>
               Fechar
             </button>

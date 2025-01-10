@@ -10,11 +10,12 @@ export default function ModalLivro({ id, fecharModal }) {
   useEffect(() => {
     LivroService.UmLivro(id).then((livro) => setLivros(livro));
   }, [id]);
+
   const AlugarLivro = async () => {
     try {
-      await LivroRetirado.InserirLivroRetirado(livro.id);
+      await LivroRetirado.InserirLivroRetirado(id);
       alert("Livro alugado com sucesso!");
-      setShowModal(false);
+      setShowModal(false); 
     } catch (error) {
       console.error("Erro ao alugar o livro:", error);
       alert("Erro ao alugar o livro. Verifique se você está logado.");

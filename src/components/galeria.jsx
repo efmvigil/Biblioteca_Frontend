@@ -1,26 +1,37 @@
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react"
-import "./galeria.css"
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import LivroService from "../service/LivroService";
 import CardLivro from "./CardLivro_new";
-import Carroussel from "./Carroussel"
+import Carroussel from "./Carroussel";
+import "./galeria.css";
 
 export default function Galeria() {
+  const [listaLivros, setListaLivros] = useState([]); 
+  const location = useLocation();
 
-  const [listaLivros, setListaLivros] = useState([]);
-
+  const queryParams = new URLSearchParams(location.search);
+  const titulovar = queryParams.get("titulo");
+  const titulooficial = {
+    titulo: titulovar
+    };
   useEffect(() => {
+    if (titulovar) {
+      LivroService.LivroParecido(titulooficial).then((livros) => setListaLivros(livros));
+    } else {
       LivroService.listarLivros().then((livros) => setListaLivros(livros));
-  }, [])
+    }
+  }, [titulovar]);
 
   return (
     <section className="galeria">
-       <Carroussel></Carroussel>
-        <div className="row ">
-            { listaLivros.map(livro => 
-                <CardLivro key={livro.id} livro={livro} />
-            )  } 
-    </div>
+      <Carroussel />
+      <div className="row">
+        {listaLivros.length > 0 ? (
+          listaLivros.map((livro) => <CardLivro key={livro.id} livro={livro} />)
+        ) : (
+          <p>Nenhum livro encontrado.</p>
+        )}
+      </div>
     </section>
   );
 }

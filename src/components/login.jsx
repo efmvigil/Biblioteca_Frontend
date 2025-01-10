@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { , useNavigate } from "react-router-dom";
+import { Link,useNavigate } from 'react-router-dom';
 
 import './login.css';
 import logarUsuario from '../service/AuthService';
@@ -41,7 +42,7 @@ function Login() {
         <div>
           <a href="#">Esqueci minha senha</a>
           <input type="submit" value="Fazer login" id="btn-login" />
-          <input type="submit" value="Criar uma conta" />
+          <Link to="/cadastro"><input type="submit" value="Criar uma conta" /></Link> 
         </div>
       </form>
       {mensagem && <p>{mensagem}</p>}

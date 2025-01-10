@@ -12,8 +12,15 @@ export default function CardLivro({ livro }) {
       alert("Livro alugado com sucesso!");
       setShowModal(false); 
     } catch (error) {
-      console.error("Erro ao alugar o livro:", error);
-      alert("Erro ao alugar o livro. Verifique se você está logado.");
+      if(error.response.data.codigo == 409){
+        console.error("Livro Já Alugado!", error);
+        alert("Este Livro Já foi Alugado por outra Pessoa.");
+      }else{
+        console.error("Erro ao alugar o livro:", error);
+        console.log(error)
+        alert("Erro ao alugar o livro. Verifique se você está logado.");
+      }
+
     }
   };
 

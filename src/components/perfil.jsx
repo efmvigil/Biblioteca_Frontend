@@ -154,7 +154,7 @@ function LivrosRetirados({ idUsuario }) {
     return (
       <div id="display-livros">
         {arrLivros.map((obj) => {
-          return <Card titulo={obj.nome_livro} img="/assets/img/imagem1.png" />;
+          return <Card titulo={obj.nome_livro} img={obj.imagem} />;
         })}
         {mensagemErro && <p>{mensagemErro}</p>}
       </div>

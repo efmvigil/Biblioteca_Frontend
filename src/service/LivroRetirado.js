@@ -1,10 +1,18 @@
 import axios from 'axios';
 
 const BASE_URL = 'http://localhost:3200/api/livrosRetirados';
+const API_URL = 'http://localhost:3200'; // Base para servir as imagens
 
 async function listarLivrosRetirados() {
   const response = await axios.get(BASE_URL);
-  return response.data;
+
+  // Converte o caminho relativo da imagem para uma URL completa
+  return response.data.map((livro) => ({
+    ...livro,
+    imagem: livro.imagem
+      ? `${API_URL}${livro.imagem}`
+      : '/assets/img/default.jpg',
+  }));
 }
 
 async function InserirLivroRetirado(idLivro) {
@@ -39,7 +47,14 @@ async function listarLporU(id) {
 
   try {
     const response = await axios.get(`${BASE_URL}/ListarLporU/${id}`, config);
-    return response.data;
+
+    // Converte o caminho da imagem para URL completa
+    return response.data.map((livro) => ({
+      ...livro,
+      imagem: livro.imagem
+        ? `${API_URL}${livro.imagem}`
+        : '/assets/img/default.jpg',
+    }));
   } catch (error) {
     console.error(
       'Erro ao listar livros retirados por usuário:',

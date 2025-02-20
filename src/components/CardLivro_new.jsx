@@ -13,7 +13,10 @@ export default function CardLivro({ livro }) {
     } catch (error) {
       if (error.response.data.codigo == 409) {
         console.error('Livro Já Alugado!', error);
-        alert('Este Livro Já foi Alugado por outra Pessoa.');
+        alert('Livro indisponível para retirada!');
+      } else if (error.response.data.codigo == 403) {
+        console.error('Usuário já retirou 3 livros.', error);
+        alert('Não é possivel retirar mais de 3 livros ao mesmo tempo!');
       } else {
         console.error('Erro ao alugar o livro:', error);
         console.log(error);
@@ -45,7 +48,7 @@ export default function CardLivro({ livro }) {
             <h4>{livro.titulo}</h4>
 
             <button className="btn btn-success" onClick={AlugarLivro}>
-              Alugar{' '}
+              Retirar{' '}
             </button>
           </div>
         </div>

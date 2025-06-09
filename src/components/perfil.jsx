@@ -9,10 +9,17 @@ function Perfil() {
   const [usuario, setUsuario] = useState(null);
   const [reload, setReload] = useState(false);
 
-  if (!idUsuario) return <p>Usuario não está logado!</p>;
-
   useEffect(() => {
-    umUsuario(idUsuario).then((res) => setUsuario(res));
+    const fetchUsuario = async () => {
+      try {
+        const res = await umUsuario(idUsuario);
+        setUsuario(res);
+      } catch (error) {
+        console.error('Erro ao buscar usuário:', error);
+      }
+    };
+
+    fetchUsuario();
   }, [idUsuario, reload]);
 
   if (!usuario) return <p>Carregando...</p>;
@@ -154,7 +161,14 @@ function LivrosRetirados({ idUsuario }) {
     return (
       <div id="display-livros">
         {arrLivros.map((obj) => {
-          return <Card titulo={obj.nome_livro} img={obj.imagem} />;
+          return (
+            <Card
+              key={obj.id}
+              titulo={obj.nome_livro}
+              img={obj.imagem}
+              id={obj.id}
+            />
+          );
         })}
         {mensagemErro && <p>{mensagemErro}</p>}
       </div>

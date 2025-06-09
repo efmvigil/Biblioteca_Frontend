@@ -1,8 +1,6 @@
-
-
 .galeria {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    background-color: #F5F5DC;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  background-color: #f5f5dc;
+}

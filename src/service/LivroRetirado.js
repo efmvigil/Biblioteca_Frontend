@@ -32,7 +32,7 @@ async function InserirLivroRetirado(idLivro) {
   return response.data;
 }
 
-async function listarLporU(id) {
+async function listarLporU(idUsuario) {
   const token = localStorage.getItem('token');
 
   if (!token) {
@@ -46,7 +46,10 @@ async function listarLporU(id) {
   };
 
   try {
-    const response = await axios.get(`${BASE_URL}/ListarLporU/${id}`, config);
+    const response = await axios.get(
+      `${BASE_URL}/ListarLporU/${idUsuario}`,
+      config
+    );
 
     // Converte o caminho da imagem para URL completa
     return response.data.map((livro) => ({
@@ -66,8 +69,28 @@ async function listarLporU(id) {
   }
 }
 
+async function devolver(idLivro) {
+  const token = localStorage.getItem('token');
+
+  if (!token) {
+    throw new Error('Token de autenticação não encontrado.');
+  }
+
+  try {
+    console.log(idLivro);
+    return await axios.delete(`${BASE_URL}/${idLivro}`);
+  } catch (error) {
+    console.error(
+      'Erro ao devolver livro:',
+      error.response?.data || error.message
+    );
+    alert('Erro ao devolver livro.');
+  }
+}
+
 export default {
   listarLivrosRetirados,
   InserirLivroRetirado,
   listarLporU,
+  devolver,
 };

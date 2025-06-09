@@ -76,3 +76,9 @@ span {
   justify-content: center;
   gap: 8%;
 }
+
+.livro {
+  display: flex;
+  flex-direction: column;
+  gap: 10%;
+}
